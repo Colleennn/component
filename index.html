@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>vue demo</title>
+    <script type="text/javascript" src="script/vue-2.5.6.min.js"></script>
+    <style type="text/css" media="screen">
+    body {
+        min-width: 600px;
+    }
+
+    p,
+    pre {
+        padding-left: 2em;
+    }
+
+    textarea {
+        vertical-align: middle;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper1">
+        <h1>基础vue</h1>
+        <div>
+            <h2>1. 数据插值和表单双向绑定</h2>
+            <p>数据采用双大括号形式的文本插值： {{}}</p>
+            <p>可以使用 v-model 指令在 input textarea select等元素上创建双向数据绑定以此根据用户输入时间更新数据
+                <br>
+                请在下面输入：
+            </p>
+            <p>
+                input： <input type="text" v-model="msg" placeholder="please input">
+                textarea : <textarea v-model="msg"></textarea>
+                select:
+                <select name="sl" v-model="msg" value="2">
+                    <option value=" ">1</option>
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                </select>
+            </p>
+            <p>
+                <span>Move message : {{msg}}</span>
+            </p>
+            <p>
+                <span v-once>Static message : {{msg}}</span>
+            </p>
+            <p>
+                checkbox: <input type="checkbox" name="study" v-model="checked" checked="checked">
+                <br>
+                <b>绑定布尔值</b>
+                <br>
+                label1 : <label>{{checked}}</label>
+            </p>
+            <p>
+                checkbox:
+                <input type="checkbox" name="js" v-model="checkName" value="js">
+                label1 : <label>js</label>
+                <input type="checkbox" name="css" v-model="checkName" value="css">
+                label2 : <label>css</label>
+                <input type="checkbox" name="html" v-model="checkName" value="html">
+                label3 : <label>html</label>
+                <br>
+                <b>复选框存入数组中</b>
+                <br>
+                <span>checkName : {{checkName}}</span>
+            </p>
+            <p>
+                radio: 二者选其一<br>
+                <input type="radio" v-model="sex" name="sex" value="male">
+                <label> male </label>
+                <br>
+                <input type="radio" v-model="sex" name="sex" value="women">
+                <label> women </label>
+                <br>
+                sex : {{sex}}
+            </p>
+            <p>
+                select
+            </p>
+        </div>
+        <div>
+            <h2>2. 计算属性:数据依赖缓存（Data Follow Cache）</h2>
+            <pre>computed: {
+            reverseMessage: function() {
+                return this.msg.split('').reverse().join('');
+            }}
+                </pre>
+            <p>
+                reverseMsg: {{reverseMessage}}
+            </p>
+            <h3>2.1 计算属性setter构建</h3>
+            <p v-once>t1:{{t1}}</p>
+            <p v-once>t2:{{t2}}</p>
+            <p><b>set change:</b></p>
+            <p>new t1 : {{t1}}</p>
+            <p>new t2 : {{t2}}</p>
+            <h3>2.1 计算属性getter构建(默认存在)</h3>
+            <p>
+                getName : {{fullName}}
+            </p>
+        </div>
+        <div>
+            <h2>3. 侦听器</h2>
+            <input type="number" name="num" v-model.number="age">
+        </div>
+    </div>
+    <div id="wrapper2">
+    </div>
+    <script type="text/javascript">
+    var vm = new Vue({
+        el: '#wrapper1',
+        data: {
+            msg: 'hello',
+            t1: 'foo',
+            t2: 'bird',
+            flag: true,
+            checked: true,
+            checkName: [],
+            sex: '',
+            age: 12
+        },
+        computed: {
+            reverseMessage: function() {
+                return this.msg.split('').reverse().join('');
+            },
+            fullName: {
+                get: function() {
+                    return this.t1 + " " + this.t2;
+                },
+                set: function(nameValue) {
+                    var names = nameValue.split(' ');
+                    this.t1 = names[0];
+                    this.t2 = names[names.length - 1];
+                }
+            }
+        }
+    });
+    console.log(vm.reverseMessage);
+    vm.fullName = "jd aili";
+
+
+    var b = 5;
+
+    function outer() {
+        function inner() {
+            b++;
+            console.log(b++);
+            var b = 3;
+        }
+        inner();
+    }
+    outer();
+
+    </script>
+</body>
+
+</html>
