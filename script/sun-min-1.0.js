@@ -202,7 +202,7 @@ Element.prototype.getUserData = function(data) {
     } else {
         return that.getAttribute(data);
     }
-};
+}
 /**
  * [retSibling  返回元素e的第n个兄弟元素节点
  * n > 0，返回后面的兄弟元素节点，
@@ -212,7 +212,7 @@ Element.prototype.getUserData = function(data) {
  * @param  {[type]} n [第n个兄弟]
  * @return {[type]}   [返回目标兄弟节点]
  */
-Element.protype.getIndexSiblings = function(n) {
+Element.prototype.getIndexSiblings = function(n) {
     var e = this;
     while (e && n) {
         /*若e有意义进入循环*/
@@ -304,9 +304,9 @@ Object.prototype.pesudoToArray = function() {
     var args4 = (that.length === 1 ? [that[0]] : Array.apply(null, that));
     // 方法 5：ES6 -- Array.from()
     var args5 = Array.from(that);
-    //方法 6 ： ES6 -- 扩展运算符 
+    //方法 6 ： ES6 -- 扩展运算符
     var args6 = [...that];
-    return (args4 || arArray.from() gs1 || args2 || args3);
+    return (args4 || args1 || args2 || args3);
 }
 /**
  * [inherit 继承实现--圣杯模式]
@@ -820,7 +820,7 @@ var CookieUtil = {
     unset: function(name, path, domain, secure) {
         this.set(name, "", new Date(0), path, domain, secure);
     }
-};
+}
 
 var EventUtil = {
     /**
